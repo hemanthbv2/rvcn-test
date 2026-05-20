@@ -12,7 +12,9 @@
  * If left empty, form data will only be shown in chat (no backend).
  * ═══════════════════════════════════════════════════════════════
  */
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbweu2IVU6J23Dh9_nai5EmwFsjipR3HJmSMSh5ROOk-jcznWhha1Ng2c6WdizFWtYmA/exec';  // ← Paste your Google Apps Script Web App URL here
+const GOOGLE_SHEETS_URL = (window.rvcnChatbotSettings && window.rvcnChatbotSettings.googleSheetsUrl)
+  ? window.rvcnChatbotSettings.googleSheetsUrl
+  : 'https://script.google.com/macros/s/AKfycbweu2IVU6J23Dh9_nai5EmwFsjipR3HJmSMSh5ROOk-jcznWhha1Ng2c6WdizFWtYmA/exec';
 
 const RVCN_DATA = {
 

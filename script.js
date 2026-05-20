@@ -16,6 +16,13 @@
   const INACTIVITY_TIMEOUT = 120000; // 120 seconds (2 minutes)
   const STORAGE_KEY = 'rvcn_chatbot_state';
 
+  // Helper to dynamically resolve the logo path in WordPress or standalone environments
+  const getLogoUrl = () => {
+    return (window.rvcnChatbotSettings && window.rvcnChatbotSettings.logoUrl)
+      ? window.rvcnChatbotSettings.logoUrl
+      : 'logo.png';
+  };
+
   // ─── DOM References ────────────────────────────────────────
   const chatContainer = document.getElementById('chatContainer');
   const chatMessages = document.getElementById('chatMessages');
@@ -89,7 +96,7 @@
           const messageEl = document.createElement('div');
           messageEl.className = `message ${msg.type}`;
           messageEl.innerHTML = `
-            <div class="message-avatar">${msg.type === 'bot' ? '<img src="logo.png" alt="RV">' : 'You'}</div>
+            <div class="message-avatar">${msg.type === 'bot' ? '<img src="' + getLogoUrl() + '" alt="RV">' : 'You'}</div>
             <div>
               <div class="message-bubble">${msg.html}</div>
               <span class="message-time">${msg.time}</span>
@@ -297,7 +304,7 @@
     const messageEl = document.createElement('div');
     messageEl.className = 'message bot';
     messageEl.innerHTML = `
-      <div class="message-avatar"><img src="logo.png" alt="RV"></div>
+      <div class="message-avatar"><img src="${getLogoUrl()}" alt="RV"></div>
       <div>
         <div class="message-bubble">${formatMessage(html)}</div>
         <span class="message-time">${getTimeString()}</span>
