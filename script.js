@@ -589,6 +589,7 @@
 
     // Map form data to spreadsheet columns based on form type
     let payload = {
+      ...formData,
       formType: formType,
       name: formData.name || '',
       phone: formData.phone || '',
@@ -621,21 +622,24 @@
         payload.programme = '';
         payload.extra1 = '';
         payload.extra2 = '';
-        payload.extra3 = 'Campus Visit — 10:30 AM';
+        payload.extra3 = 'Campus Visit';
+        payload.timeSlot = '10:30 AM';
         break;
 
       case 'campus_visit_1200':
         payload.programme = '';
         payload.extra1 = '';
         payload.extra2 = '';
-        payload.extra3 = 'Campus Visit — 12:00 PM';
+        payload.extra3 = 'Campus Visit';
+        payload.timeSlot = '12:00 PM';
         break;
 
       case 'campus_visit_0300':
         payload.programme = '';
         payload.extra1 = '';
         payload.extra2 = '';
-        payload.extra3 = 'Campus Visit — 3:00 PM';
+        payload.extra3 = 'Campus Visit';
+        payload.timeSlot = '3:00 PM';
         break;
 
       case 'talk_to_counsellor':
@@ -656,8 +660,26 @@
         payload.extra3 = formType;
     }
 
-    // 1. Send to local Email Server
-    fetch('http://localhost:3000/send-lead', {
+    if (payload.extra3) {
+      payload.formType = payload.extra3;
+    }
+
+    let endpoint = '/send-lead';
+    switch (payload.extra3) {
+      case 'Fee Enquiry': endpoint = '/send-fee-enquiry'; break;
+      case 'Scholarship Guidance': endpoint = '/send-scholarship'; break;
+      case 'Campus Visit': endpoint = '/send-campus-visit'; break;
+      case 'Talk to Admission Counsellor': endpoint = '/send-counsellor'; break;
+      case 'Book Counselling Session': endpoint = '/send-book-counselling'; break;
+    }
+
+    // 1. Send to Backend Server
+    // If on localhost, point to port 3000. If on Vercel, hit the relative path!
+    const baseUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+      ? 'http://localhost:3000'
+      : '';
+
+    fetch(baseUrl + endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

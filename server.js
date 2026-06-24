@@ -17,11 +17,10 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Endpoint to handle new leads
-app.post('/send-lead', async (req, res) => {
+async function sendLeadEmail(req, res) {
     try {
         const leadData = req.body;
-        console.log('Received new lead:', leadData);
+        console.log(`Received new lead on ${req.path}:`, leadData);
 
         // Format the email content
         let emailHtml = `
@@ -35,6 +34,7 @@ app.post('/send-lead', async (req, res) => {
 
         // Add dynamically collected extra fields
         if (leadData.email) emailHtml += `<p><strong>Email:</strong> <span style="color: #555;">${leadData.email}</span></p>`;
+        if (leadData.timeSlot) emailHtml += `<p><strong>Time:</strong> <span style="color: #555;">${leadData.timeSlot}</span></p>`;
         if (leadData.city) emailHtml += `<p><strong>City:</strong> <span style="color: #555;">${leadData.city}</span></p>`;
         if (leadData.percentage) emailHtml += `<p><strong>12th Percentage:</strong> <span style="color: #555;">${leadData.percentage}%</span></p>`;
         if (leadData.specialization) emailHtml += `<p><strong>Specialization:</strong> <span style="color: #555;">${leadData.specialization}</span></p>`;
@@ -50,7 +50,7 @@ app.post('/send-lead', async (req, res) => {
         const mailOptions = {
             from: `"RVCN Chatbot" <${process.env.EMAIL_USER}>`,
             to: process.env.RECEIVER_EMAIL,
-            subject: `🚨 RVCN Chatbot: New Student Lead Submissions`,
+            subject: `🚨 RVCN Lead: ${leadData.formType || 'New Submission'}`,
             html: emailHtml
         };
 
@@ -64,9 +64,22 @@ app.post('/send-lead', async (req, res) => {
         console.error('Error sending lead email:', error);
         res.status(500).json({ success: false, message: 'Failed to send lead email.', error: error.message });
     }
-});
+}
+
+// Map the 5 distinct lead types to specific endpoints
+app.post('/send-fee-enquiry', sendLeadEmail);
+app.post('/send-scholarship', sendLeadEmail);
+app.post('/send-campus-visit', sendLeadEmail);
+app.post('/send-counsellor', sendLeadEmail);
+app.post('/send-book-counselling', sendLeadEmail);
+app.post('/send-lead', sendLeadEmail); // Fallback
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`RVCN Backend Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`RVCN Backend Server running on http://localhost:${PORT}`);
+    });
+}
+
+// Export for Vercel Serverless compatibility
+module.exports = app;
