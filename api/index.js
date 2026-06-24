@@ -8,9 +8,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('./')); // Serve static files from the current directory
 
-// Configure Nodemailer transporter
+// Configure Nodemailer transporter with explicit SMTP settings for Serverless
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Use SSL
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -65,6 +67,16 @@ async function sendLeadEmail(req, res) {
         res.status(500).json({ success: false, message: 'Failed to send lead email.', error: error.message });
     }
 }
+
+// Health check endpoint to verify Vercel environment variables
+app.get('/api/status', (req, res) => {
+    res.json({
+        status: 'online',
+        emailUserLoaded: !!process.env.EMAIL_USER,
+        emailPassLoaded: !!process.env.EMAIL_PASS,
+        receiverLoaded: !!process.env.RECEIVER_EMAIL
+    });
+});
 
 // Catch all POST requests to ensure Vercel Serverless handles the rewrites flawlessly
 app.post('*', sendLeadEmail);
