@@ -368,6 +368,7 @@ const CHAT_FLOWS = {
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
         { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true },
         { name: "percentage", label: "12th Percentage (%)", type: "number", placeholder: "e.g. 75", required: true },
         { name: "city", label: "City", type: "text", placeholder: "Your city", required: true }
       ],
@@ -443,6 +444,7 @@ const CHAT_FLOWS = {
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
         { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true },
         { name: "specialization", label: "Preferred Specialization", type: "select", options: ["Medical Surgical Nursing", "OBG Nursing", "Paediatric Nursing", "Psychiatric Nursing", "Community Health Nursing"], required: true },
         { name: "city", label: "City", type: "text", placeholder: "Your city", required: true }
       ],
@@ -475,8 +477,8 @@ const CHAT_FLOWS = {
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
         { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
-        { name: "programme", label: "Interested Programme", type: "select", options: ["B.Sc. Nursing", "M.Sc. Nursing", "NPCC"], required: true },
-        { name: "category", label: "Category", type: "select", options: ["General", "OBC", "SC", "ST", "Other"], required: true }
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true },
+        { name: "programme", label: "Interested Programme", type: "select", options: ["B.Sc. Nursing", "M.Sc. Nursing", "NPCC", "Ph.D. Nursing"], required: true }
       ],
       submitLabel: "Get Scholarship Guidance 📩",
       successMessage: `Thank you! ✅ Our scholarship guidance counsellor will reach out to you shortly with eligibility details and application steps.\n\n📞 For immediate assistance, call: <strong>${RVCN_DATA.college.phone.office}</strong>`
@@ -522,7 +524,8 @@ const CHAT_FLOWS = {
       id: "campus_visit_1030",
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
-        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true }
+        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true }
       ],
       submitLabel: "Confirm Visit ✅",
       successMessage: `🎉 <strong>Campus visit booked!</strong>\n\n📍 <strong>Location:</strong> ${RVCN_DATA.college.address}\n⏰ <strong>Time:</strong> 10:30 AM\n\nOur team will call you to confirm the date. See you soon! 🏫\n\n📞 For any changes, call: <strong>${RVCN_DATA.college.phone.office}</strong>`
@@ -540,7 +543,8 @@ const CHAT_FLOWS = {
       id: "campus_visit_1200",
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
-        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true }
+        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true }
       ],
       submitLabel: "Confirm Visit ✅",
       successMessage: `🎉 <strong>Campus visit booked!</strong>\n\n📍 <strong>Location:</strong> ${RVCN_DATA.college.address}\n⏰ <strong>Time:</strong> 12:00 PM\n\nOur team will call you to confirm the date. See you soon! 🏫\n\n📞 For any changes, call: <strong>${RVCN_DATA.college.phone.office}</strong>`
@@ -558,7 +562,8 @@ const CHAT_FLOWS = {
       id: "campus_visit_0300",
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
-        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true }
+        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true }
       ],
       submitLabel: "Confirm Visit ✅",
       successMessage: `🎉 <strong>Campus visit booked!</strong>\n\n📍 <strong>Location:</strong> ${RVCN_DATA.college.address}\n⏰ <strong>Time:</strong> 3:00 PM\n\nOur team will call you to confirm the date. See you soon! 🏫\n\n📞 For any changes, call: <strong>${RVCN_DATA.college.phone.office}</strong>`
@@ -591,7 +596,8 @@ const CHAT_FLOWS = {
       id: "talk_to_counsellor",
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
-        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true }
+        { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true }
       ],
       submitLabel: "Request Callback 📞",
       successMessage: `Thank you! ✅ Our admissions counsellor will call you within <strong>30 minutes</strong>.\n\n📞 Meanwhile, you can also call: <strong>${RVCN_DATA.college.phone.office}</strong>`
@@ -612,6 +618,7 @@ const CHAT_FLOWS = {
       fields: [
         { name: "name", label: "Your Full Name", type: "text", placeholder: "Enter your name", required: true },
         { name: "phone", label: "Phone Number", type: "tel", placeholder: "Enter 10-digit number", required: true },
+        { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email", required: true },
         { name: "specialization", label: "Preferred Specialization", type: "select", options: ["Medical Surgical Nursing", "OBG Nursing", "Paediatric Nursing", "Psychiatric Nursing", "Community Health Nursing"], required: true }
       ],
       submitLabel: "Book Session 📩",

@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chat with RV College of Nursing — Get instant answers about B.Sc. Nursing, M.Sc. Nursing, NPCC, placements, scholarships, and more.">
-  <meta name="keywords" content="RVCN, RV College of Nursing, Bangalore, Nursing College, B.Sc Nursing, M.Sc Nursing, NPCC, Admissions, Chatbot">
+  <meta name="description"
+    content="Chat with RV College of Nursing — Get instant answers about B.Sc. Nursing, M.Sc. Nursing, NPCC, placements, scholarships, and more.">
+  <meta name="keywords"
+    content="RVCN, RV College of Nursing, Bangalore, Nursing College, B.Sc Nursing, M.Sc Nursing, NPCC, Admissions, Chatbot">
   <meta name="author" content="RV College of Nursing">
   <meta property="og:title" content="RVCN Chatbot — RV College of Nursing">
-  <meta property="og:description" content="Get instant answers about nursing programmes, admissions, scholarships, and placements at RV College of Nursing, Bengaluru.">
+  <meta property="og:description"
+    content="Get instant answers about nursing programmes, admissions, scholarships, and placements at RV College of Nursing, Bengaluru.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rvcn.edu.in/">
   <title>RVCN Chatbot — RV College of Nursing, Bengaluru</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
 </head>
+
 <body>
-
-
 
   <!-- Welcome Prompt Tooltip -->
   <div class="welcome-prompt hidden" id="welcomePrompt" role="alert">
@@ -29,7 +33,8 @@
 
   <!-- Chat Toggle Button -->
   <button class="chat-toggle" id="chatToggle" aria-label="Open chat" type="button">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
     <span class="badge" aria-hidden="true">1</span>
@@ -51,7 +56,11 @@
         </div>
       </div>
       <button class="chat-clear-btn" id="chatClearBtn" aria-label="Clear chat" type="button" title="Clear chat">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
       </button>
       <button class="chat-close-btn" id="chatCloseBtn" aria-label="Close chat" type="button">✕</button>
     </header>
@@ -63,16 +72,11 @@
 
     <!-- Input Area -->
     <div class="chat-input-area">
-      <input
-        type="text"
-        class="chat-input"
-        id="chatInput"
-        placeholder="Type a message or click a button..."
-        autocomplete="off"
-        aria-label="Type your message"
-      >
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message or click a button..."
+        autocomplete="off" aria-label="Type your message">
       <button class="chat-send-btn" id="chatSendBtn" aria-label="Send message" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
         </svg>
@@ -86,4 +90,5 @@
   <script src="script.js"></script>
 
 </body>
+
 </html>

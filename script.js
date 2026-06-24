@@ -45,7 +45,7 @@
     }
   }
 
-  // ─── Session Storage ──────────────────────────────────────
+  // ─── Local Storage ────────────────────────────────────────
   function saveState() {
     const messages = [];
     const messageEls = chatMessages.querySelectorAll('.message');
@@ -77,11 +77,11 @@
       activeInteractive
     };
     
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
   function loadState() {
-    const saved = sessionStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return false;
 
     try {
@@ -219,7 +219,7 @@
     messageQueue = [];
     isTyping = false;
     currentFlow = null;
-    sessionStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY);
     clearInactivityTimer();
     
     if (isOpen) {
@@ -544,6 +544,10 @@
         input.style.borderColor = '#ef4444';
         input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.15)';
         isValid = false;
+      } else if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        input.style.borderColor = '#ef4444';
+        input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.15)';
+        isValid = false;
       } else {
         input.style.borderColor = '';
         input.style.boxShadow = '';
@@ -587,7 +591,8 @@
     let payload = {
       formType: formType,
       name: formData.name || '',
-      phone: formData.phone || ''
+      phone: formData.phone || '',
+      email: formData.email || ''
     };
 
     switch (formType) {
@@ -651,22 +656,35 @@
         payload.extra3 = formType;
     }
 
-    // Send to Google Sheets via Apps Script Web App
-    fetch(GOOGLE_SHEETS_URL, {
+    // 1. Send to local Email Server
+    fetch('http://localhost:3000/send-lead', {
       method: 'POST',
-      mode: 'no-cors',  // Google Apps Script requires no-cors
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
     })
-    .then(() => {
-      console.log('[RVCN Chatbot] Data sent to Google Sheets successfully');
-    })
-    .catch((error) => {
-      console.warn('[RVCN Chatbot] Failed to send data to Google Sheets:', error);
-      // Silently fail — the user already sees the success message in chat
-    });
+    .then(res => res.json())
+    .then(data => console.log('[RVCN Chatbot] Lead email sent:', data))
+    .catch(err => console.error('[RVCN Chatbot] Error sending lead email:', err));
+
+    // 2. Send to Google Sheets via Apps Script Web App (if configured)
+    if (typeof GOOGLE_SHEETS_URL !== 'undefined' && GOOGLE_SHEETS_URL) {
+      fetch(GOOGLE_SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',  // Google Apps Script requires no-cors
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        console.log('[RVCN Chatbot] Data sent to Google Sheets successfully');
+      })
+      .catch((error) => {
+        console.warn('[RVCN Chatbot] Failed to send data to Google Sheets:', error);
+      });
+    }
   }
 
   // ─── User Text Input Handling ─────────────────────────────
