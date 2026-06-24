@@ -66,13 +66,8 @@ async function sendLeadEmail(req, res) {
     }
 }
 
-// Map the 5 distinct lead types to specific endpoints
-app.post('/send-fee-enquiry', sendLeadEmail);
-app.post('/send-scholarship', sendLeadEmail);
-app.post('/send-campus-visit', sendLeadEmail);
-app.post('/send-counsellor', sendLeadEmail);
-app.post('/send-book-counselling', sendLeadEmail);
-app.post('/send-lead', sendLeadEmail); // Fallback
+// Catch all POST requests to ensure Vercel Serverless handles the rewrites flawlessly
+app.post('*', sendLeadEmail);
 
 const PORT = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== 'production') {
