@@ -296,6 +296,7 @@ const CHAT_FLOWS = {
       { label: "🏠 Hostel Details", action: "hostel_details" },
       { label: "💰 Scholarship Details", action: "scholarships" },
       { label: "🏫 Campus Visit Booking", action: "campus_visit" },
+      { label: "🩺 Trainings", action: "trainings" },
       { label: "ℹ️ About RVCN", action: "about" },
       { label: "📞 Contact Us", action: "contact" }
     ]
@@ -677,6 +678,69 @@ const CHAT_FLOWS = {
     ]
   },
 
+  // ─── Trainings ────────────────────────────────────────────────
+  trainings: {
+    messages: [
+      { text: `<strong>🩺 Trainings at RVCN</strong>\n\nRV College of Nursing offers the following specialised training programmes:`, delay: 400 },
+      { text: `Select a training to learn more:`, delay: 300 }
+    ],
+    buttons: [
+      { label: "❤️ BLS Training", action: "training_bls" },
+      { label: "👶 PLS Training", action: "training_pls" },
+      { label: "🤰 SBA Module", action: "training_sba" },
+      { label: "🧪 SBE", action: "training_sbe" },
+      { label: "← Back to Menu", action: "welcome" }
+    ]
+  },
+
+  training_bls: {
+    messages: [
+      { text: `<strong>❤️ BLS Training</strong>\n(Basic Life Support)`, delay: 400 },
+      { text: `For more details, talk to our counsellor.`, delay: 300 }
+    ],
+    buttons: [
+      { label: "📞 Enquire About BLS", action: "talk_to_counsellor" },
+      { label: "🩺 View All Trainings", action: "trainings" },
+      { label: "← Back to Menu", action: "welcome" }
+    ]
+  },
+
+  training_pls: {
+    messages: [
+      { text: `<strong>👶 PLS Training</strong>\n(Facility Based New-born Care (FBNBC) & Essential New-born Care (ENBC), IMNCI Module & PLS Module)`, delay: 400 },
+      { text: `For more details, talk to our counsellor.`, delay: 300 }
+    ],
+    buttons: [
+      { label: "📞 Enquire About PLS", action: "talk_to_counsellor" },
+      { label: "🩺 View All Trainings", action: "trainings" },
+      { label: "← Back to Menu", action: "welcome" }
+    ]
+  },
+
+  training_sba: {
+    messages: [
+      { text: `<strong>🤰 SBA Module</strong>\n(Skilled Birth Attendant)`, delay: 400 },
+      { text: `For more details, talk to our counsellor.`, delay: 300 }
+    ],
+    buttons: [
+      { label: "📞 Enquire About SBA", action: "talk_to_counsellor" },
+      { label: "🩺 View All Trainings", action: "trainings" },
+      { label: "← Back to Menu", action: "welcome" }
+    ]
+  },
+
+  training_sbe: {
+    messages: [
+      { text: `<strong>🧪 SBE</strong>\n(Simulation Based Education)`, delay: 400 },
+      { text: `For more details, talk to our counsellor.`, delay: 300 }
+    ],
+    buttons: [
+      { label: "📞 Enquire About SBE", action: "talk_to_counsellor" },
+      { label: "🩺 View All Trainings", action: "trainings" },
+      { label: "← Back to Menu", action: "welcome" }
+    ]
+  },
+
   // ─── Contact ─────────────────────────────────────────────────
   contact: {
     messages: [
@@ -722,5 +786,6 @@ const INTENT_MAP = [
   { keywords: ["seat", "seats", "availability", "vacant"], action: "welcome" },
   { keywords: ["address", "location", "where", "map", "direction", "jayanagar"], action: "contact" },
   { keywords: ["counsellor", "counselor", "talk", "callback", "call me"], action: "talk_to_counsellor" },
-  { keywords: ["counselling", "counseling", "session", "priority"], action: "book_counselling" }
+  { keywords: ["counselling", "counseling", "session", "priority"], action: "book_counselling" },
+  { keywords: ["training", "trainings", "bls", "pls", "sba", "sbe", "simulation", "basic life support", "skilled birth", "newborn care"], action: "trainings" }
 ];
